@@ -21,7 +21,16 @@ export default (state = initialState , action) => {
    return {
     ...state,
     list: arrayMove(state.list, action.payload.oldIndex, action.payload.newIndex)
-   }
+   };
+   case 'ADD_ITEM':
+       return{
+
+       };
+    case 'DELETE_ITEM':
+        return [
+            ...state.slice(0, action.index),
+            ...state.slice(action.index + 1)
+            ];
   default:
    return state
  }
@@ -33,3 +42,10 @@ export function orderList(oldIndex, newIndex) {
     payload: {oldIndex, newIndex},
   }
 }
+
+const removeItem = (index) => {
+    return {
+      type: 'DELETE_ITEM',
+      index
+    }
+  }
